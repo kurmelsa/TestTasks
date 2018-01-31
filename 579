@@ -1,0 +1,64 @@
+package com.company;
+
+import java.util.*;
+import java.io.*;
+
+import static java.lang.Math.abs;
+
+public class Main {
+    public static void main(String[] argv) throws IOException {
+        new Main().run();
+    }
+
+    PrintWriter pw;
+    Scanner sc;
+
+    public void run() throws IOException {
+        int countPol=0, countOtr=0;
+        int summPol=0, summOtr=0;
+
+        sc = new Scanner(new File("INPUT.TXT"));
+        if (sc.hasNextInt()) {
+            List <Integer> list = new ArrayList<Integer>(sc.nextInt());
+            while(sc.hasNextInt()){
+                list.add(sc.nextInt());
+            }
+
+            for (int i = 0; i<list.size(); i++){
+
+                if (list.get(i)>= 0){
+                    countPol++;
+                    summPol = summPol+list.get(i);
+                }
+                else {
+                    countOtr++;
+                    summOtr = summOtr-list.get(i);
+                }
+
+            }
+
+            pw = new PrintWriter(new File("OUTPUT.TXT"));
+
+            if (abs(summPol) < abs(summOtr)) {
+                pw.println(countOtr);
+
+                for (int i = 0; i<list.size(); i++){
+                    if(list.get(i)<0) {
+                        pw.print(String.valueOf(i+1) +" ");
+                    }
+                }
+            }
+            else {
+                pw.println(countPol);
+                for (int i = 0; i<list.size(); i++){
+                    if(list.get(i)>=0) {
+                        pw.print(String.valueOf(i+1) +" ");
+                    }
+                }
+            }
+
+            pw.close();
+
+        }
+    }
+}
