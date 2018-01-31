@@ -1,0 +1,74 @@
+package com.company;
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String[] argv) throws IOException {
+        new Main().run();
+    }
+
+    PrintWriter pw;
+    Scanner sc;
+
+    public void run() throws IOException {
+        sc = new Scanner(new File("INPUT.TXT"));
+        String strOut = "YES";
+        String str1="";
+        String str2="";
+
+        if (sc.hasNext()) {
+            str1 = sc.nextLine();
+        }
+        else{
+            strOut = "NO";
+        }
+
+        if (sc.hasNext()) {
+            str2 = sc.nextLine();
+        }
+        else{
+            strOut = "NO";
+        }
+
+        Boolean bol = true;
+        int m;
+
+        if ( str1.trim().length() == 0 || str2.trim().length() == 0){
+            strOut = "NO";
+        }
+        else {
+            final int lengthStr1 = str1.length();
+            System.out.println(lengthStr1);
+            final int lengthStr2 = str2.length();
+            System.out.println(lengthStr2);
+
+            if (lengthStr1 > 0) {
+                m = 0;
+                for (int j = 0; j < lengthStr1; j++) {
+                    System.out.println(m);
+                    m = str2.indexOf(str1.charAt(j), m);
+                    System.out.println(m);
+                    if (m >= 0) {
+                        bol = true;
+                    } else {
+                        bol = false;
+                    }
+
+                    if (bol == false) {
+                        strOut = "NO";
+                        break;
+
+                    }
+                    m++;
+                }
+
+            }
+
+
+            pw = new PrintWriter(new File("OUTPUT.TXT"));
+            pw.print(strOut);
+            pw.close();
+
+        }
+    }
+}
