@@ -1,0 +1,54 @@
+package com.company;
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String[] argv) throws IOException {
+        new Main().run();
+    }
+
+    PrintWriter pw;
+    Scanner sc;
+
+    public void run() throws IOException {
+        sc = new Scanner(new File("INPUT.TXT"));
+        if (sc.hasNextInt()) {
+            final int p = sc.nextInt();
+            int countNumber = 1;
+            int kol = 1;
+            System.out.println(p);
+            Boolean bol;
+
+            while(kol <= p){
+
+                bol = false;
+                String number = String.valueOf(countNumber);
+                int numberLength = number.length();
+                if (numberLength > 1) {
+                    for (int j = 0; j < numberLength; j++) {
+
+                        List<Character> list1 = new ArrayList<>(numberLength-1);
+                        for (int k = j + 1; k < numberLength; k++) {
+                            list1.add(number.charAt(k));
+                        }
+                        if (list1.indexOf(number.charAt(j))>=0) {
+                            bol = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (bol == false){
+                    kol++;
+                }
+
+                countNumber++;
+            }
+
+            pw = new PrintWriter(new File("OUTPUT.TXT"));
+            pw.print(countNumber-1);
+            pw.close();
+
+        }
+    }
+}
